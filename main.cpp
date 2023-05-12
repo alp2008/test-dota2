@@ -8,6 +8,14 @@ struct Forma
     string text_answer3;
 };
 
+void drawAnswer(int y, string text_answer)
+{
+    txSelectFont("Times New Roman", 40);
+    txSetColor(TX_WHITE, 7);
+    txRectangle(50, 400, 90, 440);
+    txDrawText(100,400, 800, 450, text_answer.c_str());
+}
+
 int main()
 {
 txCreateWindow (800, 600);
@@ -16,12 +24,12 @@ txCreateWindow (800, 600);
 
     Forma quest1 = {"какой стан длится дольше?","primal roar","sacred arrow","ice path"};
 
-    Forma quest2 = {"коково максимальное кол-во эффектов способности corrosive weapory?","8","9","11"};
+    Forma quest2 = {"коково максимальное кол-во эффектов,\n способности corrosive weapory?","8","9","11"};
 
     int n_question = 1;
     int kol_question = 2;
 
-    while(n_question <= kol_question)
+    while(n_question <= kol_question or !GetAsyncKeyState (VK_ESCAPE))
     {
         txSetColor (TX_BLACK);
         txSetFillColor (TX_BLACK);
@@ -41,16 +49,16 @@ txCreateWindow (800, 600);
         sprintf(str, "Вопрос %d/%d", n_question, kol_question);
         txDrawText(0, 20, 800, 50, str);
         //Вопрос
-        txSelectFont("Times New Roman", 60);
-        txDrawText(0, 0, 800, 200, quest.text_question.c_str());
+        txSelectFont("Times New Roman", 40);
+        txDrawText(0, 50, 800, 250, quest.text_question.c_str());
         //Ответы
         txSelectFont("Times New Roman", 40);
-        txRectangle (50, 320, 250, 470);
-        txDrawText(50, 500, 250, 550, quest.text_answer1.c_str());
-        txRectangle (300, 320, 500, 470);
-        txDrawText(300, 500, 500, 550, quest.text_answer2.c_str());
-        txRectangle (550, 320, 750, 470);
-        txDrawText(550, 500, 750, 550, quest.text_answer3.c_str());
+        txRectangle(50, 400, 90, 440);
+        txDrawText(100,390, 300, 450, quest.text_answer1.c_str());
+        txRectangle (50, 450, 90, 490);
+        txDrawText(100,440, 300, 500, quest.text_answer2.c_str());
+        txRectangle (50, 500, 90, 540);
+        txDrawText(100, 490, 300, 550, quest.text_answer3.c_str());
 
         if( txMouseButtons() == 1 &&
             txMouseX() > 50 && txMouseX() < 250 &&
